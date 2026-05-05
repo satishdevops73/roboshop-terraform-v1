@@ -13,7 +13,7 @@ resource "azurerm_linux_virtual_machine" "frontend" {
   name                = "frontend-vm"
   resource_group_name = "Denmark-east-rg"
   location            = "Denmark East"
-  size                = "Standard_D2s_v3"
+  size                = "Standard_B1s"
   #admin_username      = "adminuser"
   network_interface_ids = [
     azurerm_network_interface.frontend.id,
