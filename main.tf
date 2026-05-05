@@ -90,7 +90,7 @@ resource "azurerm_dns_a_record" "sqlserver" {
   zone_name           = "kubek8.online"
   resource_group_name = "Denmark-east-rg"
   ttl                 = 30
-  records             = ["azurerm_network_interface.sqlserver.private_ip_address"]
+  records             = [azurerm_network_interface.sqlserver.private_ip_address]
 }
 
 
@@ -134,5 +134,5 @@ resource "azurerm_dns_a_record" "catalogue" {
   zone_name           = "kubek8.online"
   resource_group_name = "Denmark-east-rg"
   ttl                 = 30
-  records             = ["azurerm_network_interface.catalogue.private_ip_address"]
+  records             = [azurerm_network_interface.catalogue.private_ip_address]
 }
