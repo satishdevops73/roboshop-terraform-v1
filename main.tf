@@ -47,5 +47,5 @@ resource "azurerm_dns_a_record" "frontend" {
   zone_name           = "kubek8.online"
   resource_group_name = "Denmark-east-rg"
   ttl                 = 30
-  records             = ["azurerm_network_interface.frontend.private_ip_address"]
+  records             = [azurerm_network_interface.frontend.private_ip_address]
 }
