@@ -1,3 +1,11 @@
+resource "azurerm_public_ip" "frontend" {
+  name                = "frontend-pip"
+  location            = "Denmark East"
+  resource_group_name = "Denmark-east-rg"
+  allocation_method   = "Static"
+  domain_name_label   = "youruniquename123"
+}
+
 resource "azurerm_network_interface" "frontend" {
   name                = "frontend-nic"
   location            = "Denmark East"
@@ -7,6 +15,7 @@ resource "azurerm_network_interface" "frontend" {
     name                          = "frontend-nic"
     subnet_id                     = "/subscriptions/7ba54b86-56e1-4dd5-a544-23df4caeb2aa/resourceGroups/Denmark-east-rg/providers/Microsoft.Network/virtualNetworks/image-vm-vnet/subnets/default"
     private_ip_address_allocation = "Dynamic"
+    public_ip_address_id          = azurerm_public_ip.frontend.id
   }
 }
 resource "azurerm_linux_virtual_machine" "frontend" {
@@ -31,4 +40,12 @@ resource "azurerm_linux_virtual_machine" "frontend" {
   secure_boot_enabled = "true"
   vtpm_enabled = "true"
 
+}
+
+resource "azurerm_dns_a_record" "frontend" {
+  name                = "frontend-dev"
+  zone_name           = "kubek8.online"
+  resource_group_name = "Denmark-east-rg"
+  ttl                 = 30
+  records             = ["azurerm_network_interface.frontend.private_ip_address"]
 }
