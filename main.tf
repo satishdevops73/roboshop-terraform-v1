@@ -3,6 +3,13 @@ resource "azurerm_public_ip" "frontend" {
   location            = "Denmark East"
   resource_group_name = "Denmark-east-rg"
   allocation_method   = "Static"
+}
+
+resource "azurerm_public_ip" "frontend" {
+  name                = "frontend-pip"
+  location            = "Denmark East"
+  resource_group_name = "Denmark-east-rg"
+  allocation_method   = "Static"
   domain_name_label   = "youruniquename123"
 }
 
